@@ -12,10 +12,6 @@
 gif  链接http://123.57.244.105:8081/commentthumb/GIF.gif
 ![git显示，略大，请耐心](https://dn-mhke0kuv.qbox.me/c1350bfac81d5cab43a3.gif)
 
-### GitHub 链接
-废话一句：这个显示只是其中一部分，重点是：FFmpeg + Camera 的录制部分，所以，你的星星(star)也是一种更新通知。
-
-
 ### 功能点
 
 如果你看完上面的gif图，你会发现如下几点功能 (Function list)：
