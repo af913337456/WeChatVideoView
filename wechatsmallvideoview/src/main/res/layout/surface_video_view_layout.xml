@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 可以修改为 merge -->
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/surface_video_container"
+    android:layout_width="match_parent"
+    android:layout_height="250dp">
+
+    <com.example.wechatsmallvideoview.SurfaceVideoView
+        android:id="@+id/surface_video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <ImageView
+        android:scaleType="centerCrop"
+        android:id="@+id/surface_video_screenshot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <Button
+        android:id="@+id/surface_video_button"
+        android:background="@drawable/ic_play_24dp"
+        android:layout_centerInParent="true"
+        android:layout_width="45dp"
+        android:layout_height="45dp" />
+
+    <com.example.wechatsmallvideoview.LoadingCircleView
+        android:visibility="gone"
+        android:id="@+id/surface_video_progress"
+        android:layout_centerInParent="true"
+        android:layout_width="45dp"
+        android:layout_height="45dp" />
+
+</RelativeLayout>
