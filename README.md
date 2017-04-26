@@ -19,6 +19,7 @@ gif  链接http://123.57.244.105:8081/commentthumb/GIF.gif
 ### 功能点
 
 如果你看完上面的gif图，你会发现如下几点功能 (Function list)：
+
 1，<strong>直观的</strong>
 * 播放前，可以显示封面缩略图
 * 播放时，如果还没有本地缓存，那么先进行下载
