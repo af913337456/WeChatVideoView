@@ -1,7 +1,11 @@
 > 作者：林冠宏 / 指尖下的幽灵
+
 > 掘金：https://juejin.im/user/587f0dfe128fe100570ce2d8
+
 > 博客：http://www.cnblogs.com/linguanh/
+
 > GitHub ： https://github.com/af913337456/
+
 > 为了您的直观体验，请务必看完下面 gif 图，源码 gitHub 链接在其之后。
 
 为了避免大家浪费时间，直接先看下面的 Gif，略大，请耐心点。看完后，若你觉得会需要到，那么就请听我继续。
