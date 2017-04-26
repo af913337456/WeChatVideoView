@@ -309,6 +309,8 @@ public abstract class SurfaceVideoViewCreator
 
         @Override
         protected void onProgressUpdate(Integer[] values) {
+            if(progressBar == null)
+                return;
             int progress = values[0];
             progressBar.setProgerss(progress,true);
             if(progress >= 100){
