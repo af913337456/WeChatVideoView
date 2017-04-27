@@ -32,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
                     protected Activity getActivity() {
                         return MainActivity.this;     /** 当前的 Activity */
                     }
+
+                    @Override
+                    protected boolean setAutoPlay() {
+                        return false;                 /** true 适合用于，已进入就自动播放的情况 */
+                    }
+
                     @Override
                     protected int getSurfaceWidth() {
                         return 0;                     /** Video 的显示区域宽度，0 就是适配手机宽度 */

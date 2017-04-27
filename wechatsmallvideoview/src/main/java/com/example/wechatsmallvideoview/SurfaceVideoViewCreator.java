@@ -55,6 +55,7 @@ public abstract class SurfaceVideoViewCreator
     public boolean debugModel = false;
 
     protected abstract Activity getActivity();
+    protected abstract boolean setAutoPlay();
     protected abstract int getSurfaceWidth();
     protected abstract int geturfaceHeight();
     protected abstract void setThumbImage(ImageView thumbImageView);
@@ -76,7 +77,6 @@ public abstract class SurfaceVideoViewCreator
         progressBar      = (LoadingCircleView) view.findViewById(R.id.surface_video_progress);
         statusButton     = (Button) view.findViewById(R.id.surface_video_button);
         surface_video_screenshot = (ImageView) view.findViewById(R.id.surface_video_screenshot);
-        setThumbImage(surface_video_screenshot);
 
         int width = getSurfaceWidth();
         if(width != 0){
@@ -99,52 +99,62 @@ public abstract class SurfaceVideoViewCreator
 
         surfaceVideoView.setOnClickListener(this);
 
-        statusButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /** 点击即加载 */
-                /** 这里进行本地是否存在判断 */
-                try{
-                    String rootPath = Environment.getExternalStorageDirectory().getAbsolutePath()
-                            + File.separator+"myvideos/";
-                    File file = new File(rootPath);
-                    if(!file.exists()){
-                        if(!file.mkdirs()){
-                            throw new NullPointerException("创建 rootPath 失败，注意 6.0+ 的动态申请权限");
-                        }
-                    }
+        if(setAutoPlay()) {
+            /** 自动播放就不需要再去加载截图 */
+            prepareStart(getVideoPath());
+        }else {
+            setThumbImage(surface_video_screenshot);
+            statusButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    /** 点击即加载 */
+                    /** 这里进行本地是否存在判断 */
+                    prepareStart(getVideoPath());
+                }
+            });
+        }
+    }
 
-                    String[] temp = getVideoPath().split("/");
-                    videoFile =
-                            new File(Environment.getExternalStorageDirectory().getAbsolutePath()
-                                    + File.separator+"myvideos/"+temp[temp.length-1]);
-
-                    if(debugModel){
-                        /** 测试模式 */
-                        if(isUseCache){
-                            play(videoFile.getAbsolutePath());
-                        }else{
-                            if(videoFile.exists()){
-                                videoFile.delete();
-                                videoFile.createNewFile();
-                            }
-                            new MyAsyncTask().execute(getVideoPath());
-                        }
-                        return;
-                    }
-                    /** 实际情况 */
-                    if(videoFile.exists()){     /** 存在缓存 */
-                        play(videoFile.getAbsolutePath());
-                    }else{                      /** 下载再播放 */
-                        videoFile.createNewFile();
-                        new MyAsyncTask().execute(getVideoPath());
-                    }
-
-                }catch (Exception e){
-                    Log.d("zzzzz",e.toString());
+    private void prepareStart(String videoPath){
+        try{
+            String rootPath = Environment.getExternalStorageDirectory().getAbsolutePath()
+                    + File.separator+"myvideos/";
+            File file = new File(rootPath);
+            if(!file.exists()){
+                if(!file.mkdirs()){
+                    throw new NullPointerException("创建 rootPath 失败，注意 6.0+ 的动态申请权限");
                 }
             }
-        });
+
+            String[] temp = videoPath.split("/");
+            videoFile =
+                    new File(Environment.getExternalStorageDirectory().getAbsolutePath()
+                            + File.separator+"myvideos/"+temp[temp.length-1]);
+
+            if(debugModel){
+                /** 测试模式 */
+                if(isUseCache){
+                    play(videoFile.getAbsolutePath());
+                }else{
+                    if(videoFile.exists()){
+                        videoFile.delete();
+                        videoFile.createNewFile();
+                    }
+                    new MyAsyncTask().execute(getVideoPath());
+                }
+                return;
+            }
+            /** 实际情况 */
+            if(videoFile.exists()){     /** 存在缓存 */
+                play(videoFile.getAbsolutePath());
+            }else{                      /** 下载再播放 */
+                videoFile.createNewFile();
+                new MyAsyncTask().execute(getVideoPath());
+            }
+
+        }catch (Exception e){
+            Log.d("zzzzz",e.toString());
+        }
     }
 
     public void onKeyEvent(KeyEvent event){
