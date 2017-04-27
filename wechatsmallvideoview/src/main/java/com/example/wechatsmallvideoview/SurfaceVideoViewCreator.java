@@ -77,6 +77,7 @@ public abstract class SurfaceVideoViewCreator
         progressBar      = (LoadingCircleView) view.findViewById(R.id.surface_video_progress);
         statusButton     = (Button) view.findViewById(R.id.surface_video_button);
         surface_video_screenshot = (ImageView) view.findViewById(R.id.surface_video_screenshot);
+        setThumbImage(surface_video_screenshot);
 
         int width = getSurfaceWidth();
         if(width != 0){
@@ -100,10 +101,8 @@ public abstract class SurfaceVideoViewCreator
         surfaceVideoView.setOnClickListener(this);
 
         if(setAutoPlay()) {
-            /** 自动播放就不需要再去加载截图 */
             prepareStart(getVideoPath());
         }else {
-            setThumbImage(surface_video_screenshot);
             statusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
