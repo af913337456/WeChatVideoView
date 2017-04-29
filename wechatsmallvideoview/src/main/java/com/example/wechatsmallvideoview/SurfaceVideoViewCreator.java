@@ -59,6 +59,7 @@ public abstract class SurfaceVideoViewCreator
     protected abstract int getSurfaceWidth();
     protected abstract int geturfaceHeight();
     protected abstract void setThumbImage(ImageView thumbImageView);
+    protected abstract String getSecondVideoCachePath();
     protected abstract String getVideoPath();
 
     public void setUseCache(boolean useCache){
@@ -78,6 +79,7 @@ public abstract class SurfaceVideoViewCreator
         statusButton     = (Button) view.findViewById(R.id.surface_video_button);
         surface_video_screenshot = (ImageView) view.findViewById(R.id.surface_video_screenshot);
         setThumbImage(surface_video_screenshot);
+
 
         int width = getSurfaceWidth();
         if(width != 0){
@@ -144,7 +146,9 @@ public abstract class SurfaceVideoViewCreator
                 return;
             }
             /** 实际情况 */
-            if(videoFile.exists()){     /** 存在缓存 */
+            if(
+                    videoFile.exists()
+            ){     /** 存在缓存 */
                 play(videoFile.getAbsolutePath());
             }else{                      /** 下载再播放 */
                 videoFile.createNewFile();
