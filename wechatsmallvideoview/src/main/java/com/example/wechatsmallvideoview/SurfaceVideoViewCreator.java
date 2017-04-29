@@ -146,13 +146,16 @@ public abstract class SurfaceVideoViewCreator
                 return;
             }
             /** 实际情况 */
-            if(
-                    videoFile.exists()
-            ){     /** 存在缓存 */
+            if(videoFile.exists()){     /** 存在缓存 */
                 play(videoFile.getAbsolutePath());
-            }else{                      /** 下载再播放 */
+            }else{
+                String secondCacheFilePath = getSecondVideoCachePath(); /** 第二缓存目录，应对此种情况，例如，本地上传是一个目录，那么就可能要到这个目录找一下 */
+                if(secondCacheFilePath != null){
+                    play(secondCacheFilePath);
+                    return;
+                }
                 videoFile.createNewFile();
-                new MyAsyncTask().execute(getVideoPath());
+                new MyAsyncTask().execute(getVideoPath());         /** 下载再播放 */
             }
 
         }catch (Exception e){

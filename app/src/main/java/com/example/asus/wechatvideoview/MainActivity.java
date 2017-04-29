@@ -49,16 +49,26 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     protected void setThumbImage(ImageView thumbImageView) {
                         Glide.with(MainActivity.this)
-                                .load("http://123.57.244.105:8700/g0/049/046/3_1489041227220_video.mp4.jpg")
+                                .load("http://123.57.244.105:8700/g0/070/046/1493456650819_temp.mp4.jpg")
                                 .centerCrop()
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .placeholder(R.drawable.all_darkbackground)
                                 .dontAnimate()
                                 .into(thumbImageView);
                     }
+
+                    /** 这个是设置返回自己的缓存路径，
+                      * 应对这种情况：
+                      *     录制的时候是在另外的目录，播放的时候默认是在下载的目录，所以可以在这个方法处理返回缓存
+                      * */
+                    @Override
+                    protected String getSecondVideoCachePath() {
+                        return null;
+                    }
+
                     @Override
                     protected String getVideoPath() {
-                        return "http://123.57.244.105:8700/g0/049/046/3_1489041227220_video.mp4.mp4";
+                        return "http://123.57.244.105:8700/g0/070/046/1493456650819_temp.mp4";
                     }
                 };
         surfaceVideoViewCreator.debugModel = true;
