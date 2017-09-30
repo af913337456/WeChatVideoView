@@ -23,7 +23,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ActivityCompat.requestPermissions(
-                MainActivity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1
+                MainActivity.this,
+                new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                1
         );
 
         surfaceVideoViewCreator =
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                         return 0;                     /** Video 的显示区域宽度，0 就是适配手机宽度 */
                     }
                     @Override
-                    protected int geturfaceHeight() {
+                    protected int getSurfaceHeight() {
                         return 250;                   /** Video 的显示区域高度，dp 为单位 */
                     }
                     @Override

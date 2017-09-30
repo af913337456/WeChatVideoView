@@ -43,6 +43,8 @@ public abstract class SurfaceVideoViewCreator
         MediaPlayer.OnInfoListener
 {
 
+    private final static String TAG="zzzzz";
+    
     private SurfaceVideoView surfaceVideoView;
     private LoadingCircleView progressBar;
     private Button statusButton;
@@ -57,7 +59,7 @@ public abstract class SurfaceVideoViewCreator
     protected abstract Activity getActivity();
     protected abstract boolean setAutoPlay();
     protected abstract int getSurfaceWidth();
-    protected abstract int geturfaceHeight();
+    protected abstract int getSurfaceHeight();
     protected abstract void setThumbImage(ImageView thumbImageView);
     protected abstract String getSecondVideoCachePath();
     protected abstract String getVideoPath();
@@ -90,7 +92,7 @@ public abstract class SurfaceVideoViewCreator
                 =
                 (int) TypedValue.applyDimension
                         (
-                                TypedValue.COMPLEX_UNIT_DIP, geturfaceHeight(), container.getContext().getResources().getDisplayMetrics()
+                                TypedValue.COMPLEX_UNIT_DIP, getSurfaceHeight(), container.getContext().getResources().getDisplayMetrics()
                         );
         view.findViewById(R.id.surface_video_container).requestLayout();
 
@@ -135,6 +137,7 @@ public abstract class SurfaceVideoViewCreator
             if(debugModel){
                 /** 测试模式 */
                 if(isUseCache){
+                    Log.e(TAG,"使用缓存播放");
                     play(videoFile.getAbsolutePath());
                 }else{
                     if(videoFile.exists()){
@@ -159,7 +162,7 @@ public abstract class SurfaceVideoViewCreator
             }
 
         }catch (Exception e){
-            Log.d("zzzzz",e.toString());
+            Log.d(TAG,e.toString());
         }
     }
 
@@ -219,7 +222,7 @@ public abstract class SurfaceVideoViewCreator
 
     @Override
     public boolean onError(MediaPlayer mp, int what, int extra) {
-        Log.d("zzzzz","播放失败 onError "+what);
+        Log.d(TAG,"播放失败 onError "+what);
         return false;
     }
 
@@ -229,7 +232,7 @@ public abstract class SurfaceVideoViewCreator
         switch (what) {
             case MediaPlayer.MEDIA_INFO_BAD_INTERLEAVING:
                 /** 音频和视频数据不正确 */
-                Log.d("zzzzz","音频和视频数据不正确 ");
+                Log.d(TAG,"音频和视频数据不正确 ");
                 break;
             case MediaPlayer.MEDIA_INFO_BUFFERING_START: /** 缓冲开始 */
                 if (!getActivity().isFinishing()) {
@@ -253,7 +256,7 @@ public abstract class SurfaceVideoViewCreator
 
     @Override
     public void onPrepared(MediaPlayer mp) {
-        Log.d("zzzzz","播放开始 onPrepared ");
+        Log.d(TAG,"播放开始 onPrepared ");
         surfaceVideoView.setVolume(SurfaceVideoView.getSystemVolumn(getActivity()));
         surfaceVideoView.start();
         //progressBar.setVisibility(View.GONE);
@@ -302,7 +305,7 @@ public abstract class SurfaceVideoViewCreator
                     count += numread;
                     int progress =(int)(((float)count / length) * 100);
                     //更新进度
-                    Log.d("zzzzz","更新进度 "+progress);
+                    Log.d(TAG,"更新进度 "+progress);
                     if(numread <= 0){
                         publishProgress(100);
                         break;
@@ -311,14 +314,14 @@ public abstract class SurfaceVideoViewCreator
                     }
                     fos.write(buf,0,numread);
                 }while(!interceptFlag);//点击取消就停止下载.
-                Log.d("zzzzz","下载结束 ");
+                Log.d(TAG,"下载结束 ");
                 fos.close();
                 is.close();
             } catch (MalformedURLException e) {
-                Log.d("zzzzz",e.toString());
+                Log.d(TAG,e.toString());
             } catch(IOException e){
                 // Toast.makeText(App.context,"安卓6.0+ 请动态申请文件读取权限",Toast.LENGTH_LONG).show();
-                Log.d("zzzzz",e.toString());
+                Log.d(TAG,e.toString());
             }
             return null;
         }
@@ -330,7 +333,7 @@ public abstract class SurfaceVideoViewCreator
             int progress = values[0];
             progressBar.setProgerss(progress,true);
             if(progress >= 100){
-                Log.d("zzzzz","开始播放 ");
+                Log.d(TAG,"开始播放 ");
                 play(videoFile.getAbsolutePath());
             }
         }
