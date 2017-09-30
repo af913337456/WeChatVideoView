@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     protected void setThumbImage(ImageView thumbImageView) {
                         Glide.with(MainActivity.this)
-                                .load("http://123.57.244.105:8700/g0/070/046/1493456650819_temp.mp4.jpg")
+                                .load("http://img5.imgtn.bdimg.com/it/u=2306924532,2222049363&fm=27&gp=0.jpg")
                                 .centerCrop()
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .placeholder(R.drawable.all_darkbackground)
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     protected String getVideoPath() {
-                        return "http://123.57.244.105:8700/g0/070/046/1493456650819_temp.mp4";
+                        return "http://www.w3school.com.cn/example/html5/mov_bbb.mp4";
                     }
                 };
         surfaceVideoViewCreator.debugModel = true;
