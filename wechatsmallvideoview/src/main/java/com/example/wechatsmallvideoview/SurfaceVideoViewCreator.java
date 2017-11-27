@@ -54,6 +54,7 @@ public abstract class SurfaceVideoViewCreator
     private boolean isUseCache = false;
     private boolean mNeedResume;
 
+    private boolean isFinishDownload = false;
     public boolean debugModel = false;
 
     protected abstract Activity getActivity();
@@ -180,6 +181,14 @@ public abstract class SurfaceVideoViewCreator
         progressBar  = null;
         statusButton = null;
         interceptFlag = true;
+        if(!isFinishDownload){
+            // 如果还没下载完，清空缓存文件
+            if(videoFile != null){
+                Log.d(TAG, "还没下载完，清空缓存文件");
+                videoFile.delete();
+            }
+        }
+        isFinishDownload = false;
         if (surfaceVideoView != null) {
             surfaceVideoView.release();
             surfaceVideoView = null;
@@ -315,6 +324,7 @@ public abstract class SurfaceVideoViewCreator
                     fos.write(buf,0,numread);
                 }while(!interceptFlag);//点击取消就停止下载.
                 Log.d(TAG,"下载结束 ");
+                isFinishDownload = true;
                 fos.close();
                 is.close();
             } catch (MalformedURLException e) {
