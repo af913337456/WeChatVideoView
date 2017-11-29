@@ -312,6 +312,10 @@ public class SurfaceVideoView extends SurfaceView implements Callback {
 	public void release() {
 		mTargetState = STATE_RELEASED;
 		mCurrentState = STATE_RELEASED;
+		try{
+			mSurfaceHolder.removeCallback(this);
+			mSurfaceHolder = null;
+		}catch (Exception ignore){}
 		if (mMediaPlayer != null) {
 			try {
 				mMediaPlayer.release();
