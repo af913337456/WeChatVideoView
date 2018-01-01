@@ -12,6 +12,16 @@
 gif  链接http://123.57.244.105:8081/commentthumb/GIF.gif
 ![git显示，略大，请耐心](https://dn-mhke0kuv.qbox.me/c1350bfac81d5cab43a3.gif)
 
+### 引用库(use library)
+
+```java
+repositories {
+    jcenter()
+    maven { url "https://jitpack.io" }
+}
+compile 'com.github.af913337456:WeChatVideoView:1.0'
+```
+
 ### 功能点
 
 如果你看完上面的gif图，你会发现如下几点功能 (Function list)：
