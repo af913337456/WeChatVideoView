@@ -56,6 +56,8 @@ public abstract class SurfaceVideoViewCreator
 
     private boolean isFinishDownload = false;
     public boolean debugModel = false;
+    
+    private String videoPath;
 
     protected abstract Activity getActivity();
     protected abstract boolean setAutoPlay();
@@ -105,15 +107,16 @@ public abstract class SurfaceVideoViewCreator
 
         surfaceVideoView.setOnClickListener(this);
 
+        videoPath = getVideoPath();
         if(setAutoPlay()) {
-            prepareStart(getVideoPath());
+            prepareStart(videoPath);
         }else {
             statusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     /** 点击即加载 */
                     /** 这里进行本地是否存在判断 */
-                    prepareStart(getVideoPath());
+                    prepareStart(videoPath);
                 }
             });
         }
@@ -135,6 +138,7 @@ public abstract class SurfaceVideoViewCreator
                     new File(Environment.getExternalStorageDirectory().getAbsolutePath()
                             + File.separator+"myvideos/"+temp[temp.length-1]);
 
+            videoPath = getVideoPath();
             if(debugModel){
                 /** 测试模式 */
                 if(isUseCache){
@@ -145,7 +149,7 @@ public abstract class SurfaceVideoViewCreator
                         videoFile.delete();
                         videoFile.createNewFile();
                     }
-                    new MyAsyncTask().execute(getVideoPath());
+                    new MyAsyncTask().execute(videoPath);
                 }
                 return;
             }
@@ -159,7 +163,7 @@ public abstract class SurfaceVideoViewCreator
                     return;
                 }
                 videoFile.createNewFile();
-                new MyAsyncTask().execute(getVideoPath());         /** 下载再播放 */
+                new MyAsyncTask().execute(videoPath);         /** 下载再播放 */
             }
 
         }catch (Exception e){
@@ -176,13 +180,20 @@ public abstract class SurfaceVideoViewCreator
                 break;
         }
     }
+    
+    private boolean isWebUrl(String videoPath){
+        return videoPath.contains("https://")
+                || videoPath.contains("http://")
+                || videoPath.contains("ftp://");
+    }
 
     public void onDestroy(){
         progressBar  = null;
         statusButton = null;
         interceptFlag = true;
-        if(!isFinishDownload){
+        if(!isFinishDownload && isWebUrl(videoPath)){
             // 如果还没下载完，清空缓存文件
+            // 同时判断是否是网址链接，防止本地的被删除
             if(videoFile != null){
                 Log.d(TAG, "还没下载完，清空缓存文件");
                 videoFile.delete();
