@@ -9,8 +9,8 @@
 > 为了您的直观体验，请务必看完下面 gif 图，源码 gitHub 链接在其之后。
 
 为了避免大家浪费时间，直接先看下面的 Gif，略大，请耐心点。看完后，若你觉得会需要到，那么就请听我继续。
-gif  链接http://123.57.244.105:8081/commentthumb/GIF.gif
-![git显示，略大，请耐心](https://dn-mhke0kuv.qbox.me/c1350bfac81d5cab43a3.gif)
+
+![git显示，略大，请耐心](https://lc-gold-cdn.xitu.io/c1350bfac81d5cab43a3.gif)
 
 ### 引用库(use library)
 
