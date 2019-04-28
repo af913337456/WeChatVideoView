@@ -10,7 +10,6 @@
 
 为了避免大家浪费时间，直接先看下面的 Gif，略大，请耐心点。看完后，若你觉得会需要到，那么就请听我继续。
 
-![git显示，略大，请耐心](https://lc-gold-cdn.xitu.io/c1350bfac81d5cab43a3.gif)
 
 ### 引用库(use library)
 
