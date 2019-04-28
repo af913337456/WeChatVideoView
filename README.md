@@ -10,6 +10,7 @@
 
 为了避免大家浪费时间，直接先看下面的 Gif，略大，请耐心点。看完后，若你觉得会需要到，那么就请听我继续。
 
+![gif](https://bcloud-10038918.cos.ap-shanghai.myqcloud.com/ezgif.com-optimize.gif)
 
 ### 引用库(use library)
 
